@@ -98,18 +98,6 @@ ul {list-style-type: none;}
 
 /* END Days */
 
-#pancakeday {
-    background-image: url("../images/pancake.jpeg");
-    background-size: cover;
-    background-position: center;
-}
-
-#meatballsday {
-    background-image: url("../images/meatballs.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
 /* Media Queries */
 
 @media screen and (max-width:720px) {
