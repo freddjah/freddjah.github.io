@@ -76,7 +76,7 @@ ul {list-style-type: none;}
     position: relative;
 }
 
-.days .recipeday p {
+.days .recipeday span {
     color: white;
     font-weight: bold;
     text-decoration: none;
