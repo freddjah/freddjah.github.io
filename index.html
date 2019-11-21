@@ -1,34 +1,52 @@
 <html>
-  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+  <head>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <script>
+      AFRAME.registerComponent("markerhandler", {
+        init: function() {
+          const yes = document.querySelector("#yes");
+          const no = document.querySelector("#no");
+
+          // every click, we make our model grow in size :)
+          yes.addEventListener("click", function(event, target) {
+            console.log(yes.getAttribute("scale"));
+            const scale = yes.getAttribute("scale");
+            Object.keys(scale).forEach(key => (scale[key] = scale[key] + 0.1));
+            yes.setAttribute("scale", scale);
+          });
+
+          no.addEventListener("click", function(event, target) {
+            console.log(no.getAttribute("scale"));
+            const scale = no.getAttribute("scale");
+            Object.keys(scale).forEach(key => (scale[key] = scale[key] + 0.1));
+            no.setAttribute("scale", scale);
+          });
+        }
+      });
+    </script>
+  </head>
+
   <body style="margin : 0px; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam;">
-      <a-sphere
-        id="yes"
-        position="-1.5 0.5 0"
-        color="green"
-        material="opacity: 0.9;"
-      ></a-sphere>
-      <a-sphere
-        id="no"
-        position="1.5 0.5 0"
-        color="red"
-        material="opacity: 0.9;"
-      ></a-sphere>
-      <a-marker-camera markerhandler preset="hiro"></a-marker-camera>
+      <a-marker-camera cursor="rayOrigin: mouse" markerhandler preset="hiro">
+        <a-text
+          position="-1.5 2.5 2"
+          value="Fungerar kaffemaskinen bra?"
+        ></a-text>
+        <a-sphere
+          id="yes"
+          position="-1.5 0.5 0"
+          color="green"
+          material="opacity: 0.9;"
+        ></a-sphere>
+        <a-sphere
+          id="no"
+          position="1.5 0.5 0"
+          color="red"
+          material="opacity: 0.9;"
+        ></a-sphere>
+      </a-marker-camera>
     </a-scene>
   </body>
 </html>
-
-<script>
-  AFRAME.registerComponent("markerhandler", {
-    init: function() {
-      const yes = document.querySelector("#yes");
-
-      // every click, we make our model grow in size :)
-      yes.addEventListener("click", function(event, target) {
-        console.log(event);
-      });
-    }
-  });
-</script>
